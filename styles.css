@@ -208,3 +208,192 @@ footer>h5>a:hover {
     color: var(--LinkHover);
     text-decoration: none;
 }
+.light-button button.bt {
+    position: relative;
+    height: 200px;
+    display: flex;
+    align-items: flex-end;
+    outline: none;
+    background: none;
+    border: none;
+    left: -130px;
+    top: 0px;
+  }
+
+  .light-button button.bt .button-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    background-color: #0f0f0f;
+    border-radius: 5px;
+    color: #0f0f0f;
+    font-weight: 700;
+    transition: 300ms;
+    outline: #0026ff 2px solid;
+    outline-offset: 20;
+    left: 300px;
+  }
+  
+  .light-button button.bt .button-holder svg {
+    height: 50px;
+    fill: #0f0f0f;
+    transition: 300ms;
+  }
+  
+  .light-button button.bt .light-holder {
+    position: absolute;
+    height: 200px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .light-button button.bt .light-holder .dot {
+    position: absolute;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #0a0a0a;
+    border-radius: 10px;
+    z-index: 2;
+  }
+  
+  .light-button button.bt .light-holder .light {
+    position: absolute;
+    top: 0;
+    width: 200px;
+    height: 200px;
+    clip-path: polygon(50% 0%, 25% 100%, 75% 100%);
+    background: transparent;
+  }
+  
+  .light-button button.bt:hover .button-holder svg {
+    fill: rgba(198, 88, 242);
+  }
+  
+  .light-button button.bt:hover .button-holder {
+    color: rgba(198, 88, 242);
+    outline: rgba(198, 88, 242) 2px solid;
+    outline-offset: 2px;
+  }
+  
+  .light-button button.bt:hover .light-holder .light {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(180deg, rgba(198, 88, 242) 0%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0) 100%);
+  }
+  .light-button01 button.bt {
+    position: relative;
+    height: 200px;
+    display: flex;
+    align-items: flex-end;
+    outline: none;
+    background: none;
+    border: none;
+    left: 100px;
+    top: -200px;
+  }
+
+  .light-button01 button.bt .button-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+    background-color: #0f0f0f;
+    border-radius: 5px;
+    color: #0f0f0f;
+    font-weight: 700;
+    transition: 300ms;
+    outline: #0f0f0f 2px solid;
+    outline-offset: 20;
+  }
+  
+  .light-button01 button.bt .button-holder svg {
+    height: 50px;
+    fill: #0f0f0f;
+    transition: 300ms;
+  }
+  
+  .light-button01 button.bt .light-holder {
+    position: absolute;
+    height: 200px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .light-button01 button.bt .light-holder .dot {
+    position: absolute;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #0a0a0a;
+    border-radius: 10px;
+    z-index: 2;
+  }
+  
+  .light-button01 button.bt .light-holder .light {
+    position: absolute;
+    top: 0;
+    width: 200px;
+    height: 200px;
+    clip-path: polygon(50% 0%, 25% 100%, 75% 100%);
+    background: transparent;
+  }
+  
+  .light-button01 button.bt:hover .button-holder svg {
+    fill: rgba(198, 88, 242);
+  }
+  
+  .light-button01 button.bt:hover .button-holder {
+    color: rgba(198, 88, 242);
+    outline: rgba(198, 88, 242) 2px solid;
+    outline-offset: 2px;
+  }
+  
+  .light-button01 button.bt:hover .light-holder .light {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(180deg, rgba(198, 88, 242) 0%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0) 100%);
+  }
+  .Encuesta01 {
+    position: relative;
+    left: 0px;
+    top: 90px;
+    z-index: 0;
+    text-decoration: none;
+  }
+  .PortadaEn1 {
+        
+    position: relative;
+    width: 100px;
+    top: -40px;
+    border-radius: 10%;
+  
+  }
+  
+  
+  .Encuesta02 {
+    position: relative;
+    left: 0px;
+    top: 90px;
+    z-index: 0;
+    text-decoration: none;
+    width: 100px;
+    height: 30px;
+  }
+  .PortadaEn2 {
+        
+    position: relative;
+    width: 100px;
+    top: -40px;
+    border-radius: 10%;
+    z-index: 100;
+
+  }
+ 
