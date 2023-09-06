@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="stylesheet" href="./styles.css">
+    <meta charset="UTF-8">
+    <meta name="description" content="Disney Web Survery">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disney Web Survey</title>
+</head>
+
+<body>
+    <header>
+        <h1>Web Survey</h1>
+        <nav>
+            <ul class="NavBar">
+                <li>
+                    <a href="index.html" alt="Inicio" class="NavLinks">Inicio</a>
+                </li>
+                <li>
+                    <a href="QuienesSomos.html" alt="¿Quines Somos?" class="NavLinks">¿Quines Somos?</a>
+                </li>
+                <li>
+                    <a href="QueHacemos.html" alt="¿Que Hacemos?" class="NavLinks">¿Que Hacemos?</a>
+                </li>
+                <li>
+                    <a href="Encuestas.html" alt="Encuestas" class="NavLinks">Encuestas</a>
+                </li>
+                <li>
+                    <a href="Juego.html" alt="Juego 1" class="NavLinks">Juego 1</a>
+                </li>
+                <li>
+                    <a href="Juego2.html" alt="Juego 2" class="NavLinks">Juego 2</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+       
+            
+    <h1>Juego de Memoria Matemática</h1>
+    <p>Encuentra todas las parejas de operaciones matemáticas y sus resultados.</p>
+    <div id="gameBoard"></div>
+    <p>Puntuación: <span id="score">0</span></p>
+
+    <script>
+        const operators = ['+', '-', '*', '/'];
+        let cards = [];
+        let score = 0;
+        let firstCard = null;
+        let secondCard = null;
+        let isChecking = false;
+
+        // Generar cartas con operaciones y resultados aleatorios
+        function generateCards() {
+            for (let i = 1; i <= 8; i++) {
+                const operator = operators[Math.floor(Math.random() * 4)];
+                const num1 = Math.floor(Math.random() * 10) + 1;
+                const num2 = Math.floor(Math.random() * 10) + 1;
+                const result = eval(`${num1} ${operator} ${num2}`);
+                cards.push({ value: `${num1} ${operator} ${num2}`, result: result });
+                cards.push({ value: result, result: result });
+            }
+            shuffle(cards);
+        }
+
+        // Función para barajar las cartas
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Voltear una carta
+        function flipCard(index) {
+            if (!isChecking) {
+                const card = document.getElementById(`card${index}`);
+                card.textContent = cards[index].value;
+                card.classList.add('flipped');
+
+                if (firstCard === null) {
+                    firstCard = index;
+                } else if (secondCard === null) {
+                    secondCard = index;
+                    checkCards();
+                }
+            }
+        }
+
+        // Comprobar si las cartas emparejadas son iguales
+        function checkCards() {
+            if (cards[firstCard].result === cards[secondCard].result) {
+                score += 10;
+                document.getElementById('score').textContent = score;
+                firstCard = null;
+                secondCard = null;
+            } else {
+                isChecking = true;
+                setTimeout(() => {
+                    document.getElementById(`card${firstCard}`).textContent = '';
+                    document.getElementById(`card${secondCard}`).textContent = '';
+                    document.getElementById(`card${firstCard}`).classList.remove('flipped');
+                    document.getElementById(`card${secondCard}`).classList.remove('flipped');
+                    firstCard = null;
+                    secondCard = null;
+                    isChecking = false;
+                }, 1000);
+            }
+        }
+
+        // Inicializar el juego
+        generateCards();
+        const gameBoard = document.getElementById('gameBoard');
+
+        for (let i = 0; i < cards.length; i++) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.id = `card${i}`;
+            card.addEventListener('click', () => flipCard(i));
+            gameBoard.appendChild(card);
+        }
+    </script>
+           
+        </section>
+    </main>
+    <footer>
+        <div class="ContainerLogo-Redes">
+            <img src="./Imagenes/LogoE.jpg" alt="Logo">
+            <div class="RedesSociales">
+                <a href="https://www.instagram.com/txisab/">
+                    <img src="./icons/Instagram-Logo.png" alt="Instagram">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100073322197582&mibextid=D4KYlr">
+                    <img src="./icons/Facebook-Logo.png" alt="Facebook" class="Bigger">
+                </a>
+                <a href="https://www.youtube.com/@isabella2602">
+                    <img src="./icons/YouTube-Logo.png" alt="YouTube" class="Bigger">
+                </a>
+                <a href="https://co.pinterest.com/is4b3xl/?invite_code=a66c2b787d984dec8cd1f779bfbb3690">
+                    <img src="./icons/Pinterest-Logo.png" alt="Pinterest" class="Bigger">
+                </a>
+                <a href="https://www.threads.net/@txisab">
+                    <img src="./icons/Threads-Logo.png" alt="Threads">
+                </a>
+            </div>
+        </div>
+        <h5>Made by <a href="https://github.com/Fexxonn" target="_blank">@Fexxonn</a> and <a href="https://github.com/catalinafs">@catalinafs</a></h5>
+    </footer>
+</body>
+<a href = "#"
+    Class = "FLoating" 
+    Target = "_blank">
+    <i Class = "Icon-Whatsapp" ></i>
+    <img src = "icons/whatsapp.png" Class = "Whatsapp">
+</html>

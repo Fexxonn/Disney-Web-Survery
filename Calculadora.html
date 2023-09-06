@@ -36,36 +36,31 @@
         </nav>
     </header>
     <main>
-       <section>
-        <section class="Section">
-            <img src="./Imagenes/Walldisney.png" alt="Imagen Castillo">
-            <div>
-                <p class="Section-Parrafos">
-                    Con esta increíble y mágica compañía de princesas, nos embarcamos en un viaje de descubrimiento a través de la programación. Aprenderemos no sólo los fundamentos de la codificación, sino también habilidades importantes como la organización, Ta investigación, el pensamiento lógico y la colaboración. Prepárate para sumergirte en este fascinante mundo donde las princesas princesas también son programadoras!
-
-                </p>
-                <p class="Section-Parrafos">
-                    ambién utilizamos varios programas para hacer encuestas y empezar a jugar y entretenernos, además del múltiple aprendizaje que nos deja ejecutamos por medios de codificaciones páginas web y encuestas, con ayudas de la inteligencia artificial
-                </p>
-            </div>
-            
-        </section>
-        <section class="Section">
-            
-            <div>
-                <p class="Section-Parrafos">
-                    Nuestro objetivo es brindarte una plataforma donde puedas compartir tus pensamientos y emociones, participar en encuestas entretenidas y descubrir cómo tus preferencias se comparan con las de otros amantes de Disney de todo el mundo.
-                </p>
-                <p class="Section-Parrafos">
-                    Sumérgete en nuestra colección de encuestas cuidadosamente elaboradas y descubre si tu elección para la película más conmovedora coincide con la de otros fanáticos apasionados, o si tu personaje favorito ocupa el primer lugar en la lista.
-                </p>
-                <p class="Section-Parrafos">
-                    Además, podrás conocer datos curiosos y estadísticas interesantes que te harán apreciar aún más la magia detrás de tus momentos inolvidables.
-                </p>
-            </div>
-            <img src="./Imagenes/NumVerdes.png" alt="Imagen Disney">
-        </section>
-    </section>
+        
+        <div class="calculator">
+            <label for="porcentaje">Porcentaje (%):</label>
+            <input type="number" id="porcentaje" placeholder="Ingrese el porcentaje"><br>
+            <label for="total">Total:</label>
+            <input type="number" id="total" placeholder="Ingrese el total"><br>
+            <button onclick="calcularPorcentaje()">Calcular</button>
+            <div class="result" id="resultado"></div>
+        </div>
+    
+        <script>
+            function calcularPorcentaje() {
+                const total = parseFloat(document.getElementById('total').value);
+                const porcentaje = parseFloat(document.getElementById('porcentaje').value);
+                
+                if (!isNaN(total) && !isNaN(porcentaje)) {
+                    const resultado = (porcentaje / 100) * total;
+                    document.getElementById('resultado').textContent = `El ${porcentaje}%  de ${total} es igual a ${resultado.toFixed(2)}`;
+                } else {
+                    document.getElementById('resultado').textContent = 'Ingrese números válidos.';
+    
+                    
+                }
+            }
+        </script>
     </main>
     <footer>
         <div class="ContainerLogo-Redes">

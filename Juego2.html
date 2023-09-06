@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="stylesheet" href="./styles.css">
+    <meta charset="UTF-8">
+    <meta name="description" content="Disney Web Survery">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disney Web Survey</title>
+</head>
+
+<body>
+    <header>
+        <h1>Web Survey</h1>
+        <nav>
+            <ul class="NavBar">
+                <li>
+                    <a href="index.html" alt="Inicio" class="NavLinks">Inicio</a>
+                </li>
+                <li>
+                    <a href="QuienesSomos.html" alt="¿Quines Somos?" class="NavLinks">¿Quines Somos?</a>
+                </li>
+                <li>
+                    <a href="QueHacemos.html" alt="¿Que Hacemos?" class="NavLinks">¿Que Hacemos?</a>
+                </li>
+                <li>
+                    <a href="Encuestas.html" alt="Encuestas" class="NavLinks">Encuestas</a>
+                </li>
+                <li>
+                    <a href="Juego.html" alt="Juego 1" class="NavLinks">Juego 1</a>
+                </li>
+                <li>
+                    <a href="Juego2.html" alt="Juego 2" class="NavLinks">Juego 2</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+        
+        <div id="canvas-container">
+            <canvas id="canvas" width="800" height="600"></canvas>
+            <div id="tools">
+                <input type="color" id="color-picker" class="tool" value="#000000">
+                <input type="range" id="line-width" class="tool" min="1" max="20" value="5">
+                <input type="range" id="opacity" class="tool" min="0.1" max="1" step="0.1" value="1">
+                <button class="tool" id="undo-button">Deshacer</button>
+                <button class="tool" id="redo-button">Rehacer</button>
+                <button class="tool" id="pencil">Lápiz</button>
+                <button class="tool" id="eraser">Borrador</button>
+                <button id="save-button">Guardar Dibujo</button>
+            </div>
+        </div>
+        <script>
+            const canvas = document.getElementById('canvas');
+            const context = canvas.getContext('2d');
+            const colorPicker = document.getElementById('color-picker');
+            const lineWidthRange = document.getElementById('line-width');
+            const opacityRange = document.getElementById('opacity');
+            const undoButton = document.getElementById('undo-button');
+            const redoButton = document.getElementById('redo-button');
+            const pencilButton = document.getElementById('pencil');
+            const eraserButton = document.getElementById('eraser');
+            const saveButton = document.getElementById('save-button');
+            const tools = document.getElementById('tools');
+            let drawing = false;
+            let erasing = false;
+            let startX, startY;
+            let currentX, currentY;
+            let undoStack = [];
+            let redoStack = [];
+            let isDrawingLine = false;
+            let isDrawingEraser = false;
+            let backgroundImage = null;
+    
+        
+    
+            // Configuración de la pizarra
+            context.lineWidth = 5;
+            context.lineCap = 'round';
+            context.strokeStyle = colorPicker.value;
+            context.globalAlpha = 1;
+    
+            // Cambiar el color del trazo
+            colorPicker.addEventListener('input', () => {
+                context.strokeStyle = colorPicker.value;
+                context.fillStyle = colorPicker.value;
+            });
+    
+            // Cambiar el grosor de línea
+            lineWidthRange.addEventListener('input', () => {
+                context.lineWidth = lineWidthRange.value;
+            });
+    
+            // Cambiar la opacidad
+            opacityRange.addEventListener('input', () => {
+                context.globalAlpha = opacityRange.value;
+            });
+    
+            // Habilitar el lápiz
+            pencilButton.addEventListener('click', () => {
+                drawing = true;
+                erasing = false;
+                tools.classList.remove('eraser-active');
+                tools.classList.add('pencil-active');
+            });
+    
+            // Habilitar el borrador
+            eraserButton.addEventListener('click', () => {
+                drawing = true;
+                erasing = true;
+                tools.classList.remove('pencil-active');
+                tools.classList.add('eraser-active');
+            });
+    
+            canvas.addEventListener('mousedown', (e) => {
+                if (erasing) {
+                    isDrawingEraser = true;
+                    undoStack.push(context.getImageData(0, 0, canvas.width, canvas.height));
+                    redoStack = [];
+                    eraser(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+                } else {
+                    isDrawingLine = true;
+                    startX = e.clientX - canvas.getBoundingClientRect().left;
+                    startY = e.clientY - canvas.getBoundingClientRect().top;
+                    context.beginPath();
+                    context.moveTo(startX, startY);
+                }
+            });
+    
+            canvas.addEventListener('mousemove', (e) => {
+                if (isDrawingLine) {
+                    currentX = e.clientX - canvas.getBoundingClientRect().left;
+                    currentY = e.clientY - canvas.getBoundingClientRect().top;
+                    context.lineTo(currentX, currentY);
+                    context.stroke();
+                }
+                if (isDrawingEraser) {
+                    eraser(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+                }
+            });
+    
+            canvas.addEventListener('mouseup', () => {
+                if (isDrawingLine) {
+                    context.closePath();
+                    isDrawingLine = false;
+                    undoStack.push(context.getImageData(0, 0, canvas.width, canvas.height));
+                    redoStack = [];
+                }
+                if (isDrawingEraser) {
+                    isDrawingEraser = false;
+                }
+            });
+    
+            // Función de borrador
+            function eraser(x, y) {
+                const eraserSize = context.lineWidth * 5;
+                context.clearRect(x - eraserSize / 2, y - eraserSize / 2, eraserSize, eraserSize);
+            }
+    
+            // Guardar el dibujo
+            saveButton.addEventListener('click', () => {
+                const image = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = 'mi_dibujo.png';
+                link.click();
+            });
+    
+        </script>
+    </main>
+    <footer>
+        <div class="ContainerLogo-Redes">
+            <img src="./Imagenes/LogoE.jpg" alt="Logo">
+            <div class="RedesSociales">
+                <a href="https://www.instagram.com/txisab/">
+                    <img src="./icons/Instagram-Logo.png" alt="Instagram">
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100073322197582&mibextid=D4KYlr">
+                    <img src="./icons/Facebook-Logo.png" alt="Facebook" class="Bigger">
+                </a>
+                <a href="https://www.youtube.com/@isabella2602">
+                    <img src="./icons/YouTube-Logo.png" alt="YouTube" class="Bigger">
+                </a>
+                <a href="https://co.pinterest.com/is4b3xl/?invite_code=a66c2b787d984dec8cd1f779bfbb3690">
+                    <img src="./icons/Pinterest-Logo.png" alt="Pinterest" class="Bigger">
+                </a>
+                <a href="https://www.threads.net/@txisab">
+                    <img src="./icons/Threads-Logo.png" alt="Threads">
+                </a>
+            </div>
+        </div>
+        <h5>Made by <a href="https://github.com/Fexxonn" target="_blank">@Fexxonn</a> and <a href="https://github.com/catalinafs">@catalinafs</a></h5>
+    </footer>
+</body>
+<a href = "#"
+    Class = "FLoating" 
+    Target = "_blank">
+    <i Class = "Icon-Whatsapp" ></i>
+    <img src = "icons/whatsapp.png" Class = "Whatsapp">
+</html>
