@@ -33,43 +33,52 @@
                     <a href="Juego2.html" alt="Juego 2" class="NavLinks">Juego 2</a>
                 </li>
                 <li>
-                    <a href="Calculadora.html" alt = "Calculadora" Class = "NavLinks">Calculadora</a>
+                    <a href="Calculadora.html" alt = "Calculadora Porcentajes" Class = "NavLinks">Calculadora</a>
+                </li>
+                <li>
+                    <a href="Calculadora2.html" alt = "Calculadora " Class = "NavLinks">Calculadora 2</a>
                 </li>
             </ul>
         </nav>
     </header>
-    <main>
-       <section>
-        <section class="Section">
-            <img src="./Imagenes/Walldisney.png" alt="Imagen Castillo">
-            <div>
-                <p class="Section-Parrafos">
-                    Con esta increíble y mágica compañía de princesas, nos embarcamos en un viaje de descubrimiento a través de la programación. Aprenderemos no sólo los fundamentos de la codificación, sino también habilidades importantes como la organización, Ta investigación, el pensamiento lógico y la colaboración. Prepárate para sumergirte en este fascinante mundo donde las princesas princesas también son programadoras!
+    
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <input type="button" value="1" onclick="addToDisplay('1')">
+        <input type="button" value="2" onclick="addToDisplay('2')">
+        <input type="button" value="3" onclick="addToDisplay('3')">
+        <input type="button" value="4" onclick="addToDisplay('4')">
+        <input type="button" value="5" onclick="addToDisplay('5')">
+        <input type="button" value="6" onclick="addToDisplay('6')">
+        <input type="button" value="7" onclick="addToDisplay('7')">
+        <input type="button" value="8" onclick="addToDisplay('8')">
+        <input type="button" value="9" onclick="addToDisplay('9')">
+        <input type="button" value="0" onclick="addToDisplay('0')">
+        <input type="button" value="+" onclick="addToDisplay('+')">
+        <input type="button" value="-" onclick="addToDisplay('-')">
+        <input type="button" value="*" onclick="addToDisplay('*')">
+        <input type="button" value="/" onclick="addToDisplay('/')">
+        <input type="button" value="C" onclick="clearDisplay()">
+        <input type="button" value="=" onclick="calculate()">
+    </div>
 
-                </p>
-                <p class="Section-Parrafos">
-                    ambién utilizamos varios programas para hacer encuestas y empezar a jugar y entretenernos, además del múltiple aprendizaje que nos deja ejecutamos por medios de codificaciones páginas web y encuestas, con ayudas de la inteligencia artificial
-                </p>
-            </div>
-            
-        </section>
-        <section class="Section">
-            
-            <div>
-                <p class="Section-Parrafos">
-                    Nuestro objetivo es brindarte una plataforma donde puedas compartir tus pensamientos y emociones, participar en encuestas entretenidas y descubrir cómo tus preferencias se comparan con las de otros amantes de Disney de todo el mundo.
-                </p>
-                <p class="Section-Parrafos">
-                    Sumérgete en nuestra colección de encuestas cuidadosamente elaboradas y descubre si tu elección para la película más conmovedora coincide con la de otros fanáticos apasionados, o si tu personaje favorito ocupa el primer lugar en la lista.
-                </p>
-                <p class="Section-Parrafos">
-                    Además, podrás conocer datos curiosos y estadísticas interesantes que te harán apreciar aún más la magia detrás de tus momentos inolvidables.
-                </p>
-            </div>
-            <img src="./Imagenes/NumVerdes.png" alt="Imagen Disney">
-        </section>
-    </section>
-    </main>
+    <script>
+        function addToDisplay(value) {
+            document.getElementById("display").value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById("display").value = "";
+        }
+
+        function calculate() {
+            try {
+                document.getElementById("display").value = eval(document.getElementById("display").value);
+            } catch (error) {
+                document.getElementById("display").value = "Error";
+            }
+        }
+    </script>
     <footer>
         <div class="ContainerLogo-Redes">
             <img src="./Imagenes/LogoE.jpg" alt="Logo">
@@ -100,3 +109,11 @@
     <i Class = "Icon-Whatsapp" ></i>
     <img src = "icons/whatsapp.png" Class = "Whatsapp">
 </html>
+
+
+
+
+
+
+
+
